@@ -465,6 +465,39 @@ DT::datatable(res %>% select(SYMBOL, GENENAME, log2FoldChange, padj)) %>%
 
 :::
 
+## Jak przeprowadzić taką analizę?
+
+**DEG** _ *differentially expressed genes* (istotnie różnicujące geny)
+
+**GS** – *gene set* (zbiór genów)
+
+|    |DEGs |non-DEGs|Fraction|
+|----|-----|--------|--------|
+|w GS|50 | 60| 45%|
+|poza GS|70 |1000|7%|
+|proporcja|42%|6%||
+
+## To działa!
+
+::: {.r-stack}
+
+![](images/tmod-1.png){.fragment width=1500}
+
+![](images/tmod-2.png){.fragment width=1500}
+
+:::
+
+::: {.aside}
+Weiner, January, et al. "Characterization of potential biomarkers of reactogenicity of licensed antiviral vaccines: randomized controlled clinical trials conducted by the BIOVACSAFE consortium." Scientific reports 9.1 (2019): 1-14.
+:::
+
+
+::: {.notes}
+początek - odpowiedź immunologiczna nieswoista
+
+potem - swoista / adaptacyjna
+
+:::
 
 ## RNA-Seq pojedynczych komórek
 
