@@ -14,7 +14,7 @@ affiliations:
     city: Berlin 
     country: Germany
 title-slide-attributes:
-  data-background-image: files/bih_bg_logo.png
+  data-background-image: images/title_bg.png
 format:
   revealjs:
     footer: ""
@@ -44,8 +44,6 @@ library(ggplot2)
 #library(tmod)
 ```
 
-
-# Część I {.inverse background-color="#70ADC1"}
 
 ## Jak działają nasze geny
 
@@ -78,9 +76,15 @@ naprawdę działa
 ::::
 
 ::: {.notes}
+
+skłonność do poddawania się testom genetycznym ma komponentę genetyczną
+
+cały czas słyszymy
+
 Transkrypcja i translacja
 
-XXX - number of molecules per cell
+setki tysięcy kopii mRNA, należących do tysięcy (10-20 tysięcy) różnych
+genów
 
 :::
 
@@ -169,19 +173,6 @@ wielkoskalowych zestawów danych biologicznych, np.:
  - Proteomika (białka)
  - Metabolomika (metabolity)
  - Epigenomika (modyfikacje DNA)
- - Ridikulomika: wiara, że wielkoskalowe zestawy danych biologicznych rozwiążą automatycznie wszystkie nasze problemy
-:::
-
-::: {.notes}
-
-Johnatan Eisen, "Bad omics word of the day"
-
-zachłyśnięcie się tymi metodami w pierwszych dwóch dekadach XXI wieku
-
-do dzisiaj to jeszcze żyje
-
-ridikulomika: wiara 
-
 :::
 
 
@@ -339,9 +330,11 @@ wielu próbek RNA
 ## Tak wyglądają wyniki
 
 ```{r results="markdown"}
+annot <- readRDS("data/annot.rds")
 cnts <- readRDS("data/counts.rds")
 cnts %>% as.data.frame %>% 
-  dplyr::select(1:6) %>% slice(1:10) %>%
+{ merge(annot, ., by.x="PrimaryID", by.y=0) } %>%
+  dplyr::select(SYMBOL, 7:12) %>% slice(1:10) %>%
              mutate(' ... '='...')  %>%
 knitr::kable()
 ```
@@ -380,13 +373,36 @@ Problem: zainfekowani: 20-25% globalnej populacji; 5-15% zachoruje w ciągu
 Suliman, Sara, et al. "Four-gene pan-African blood signature predicts progression to tuberculosis." American journal of respiratory and critical care medicine 197.9 (2018): 1198-1208.
 :::
 
+::: {.notes}
+ankrd22 - dopiero od 2019 zaczęły się pojawiać prace usiłujące zrozumieć
+funkcję tego białka, ponieważ okazało się, że odgrywa rolę w raku
+
+ale jego funkcja do końca nie jest zrozumiała
+
+:::
+
+## Wciąż mało wiemy o genach
+
+![](images/genes_citations.png){width=1000}
+
+::: {.aside}
+Huss et al. “The Gene Wiki: community intelligence applied to human gene annotation”. 2010. Nucleic Acids Res. 38:D633-D639. doi:10.1093/nar/gkp760
+:::
+
+::: {.notes}
+
+Granty: lubimy tylko muzykę, którą znamy
+
+
+
+:::
+
 
 ## Różnicująca analiza ekspresji
 
 ```{r}
 covar <- readRDS("data/covar.rds")
 cnts  <- readRDS("data/counts.rds")
-annot <- readRDS("data/annot.rds")
 ```
 
 ```{r deseq2,cache=TRUE}
@@ -438,7 +454,7 @@ OAS2 - jest aktywowany przez interferon. koduje enzym syntetyzujący krótkie
 
 ## I tu pojawia się problem...
 
-Mamy w sumie `r nrow(res)` genów, w tym `r sgn` różnicuje grupy
+Mamy w sumie 15979 genów, w tym `r sgn` różnicuje grupy
 
 ## 
 
@@ -459,15 +475,21 @@ DT::datatable(res %>% select(SYMBOL, GENENAME, log2FoldChange, padj)) %>%
 
 ::: {.r-stack}
 
-![](images/gorilla.png){.fragment width=900}
+![](images/gorilla.png){.fragment width=700}
 
-![](images/hsa04110.gse16873.png){.fragment width=900}
+![](images/hsa04110.gse16873.png){.fragment width=800}
 
 :::
 
 ## Jak przeprowadzić taką analizę?
 
-**DEG** _ *differentially expressed genes* (istotnie różnicujące geny)
+Dzielimy geny na dwa sposoby:
+
+(i) Na podstawie ekspresji (DEGs vs non-DEGs):
+
+  **DEG** – *differentially expressed genes* (istotnie różnicujące geny)
+
+(ii) Na podstawie przynależności do grupy:
 
 **GS** – *gene set* (zbiór genów)
 
@@ -481,7 +503,7 @@ DT::datatable(res %>% select(SYMBOL, GENENAME, log2FoldChange, padj)) %>%
 
 ::: {.r-stack}
 
-![](images/tmod-1.png){.fragment width=1500}
+![](images/tmod-1.png){width=1500}
 
 ![](images/tmod-2.png){.fragment width=1500}
 
@@ -527,7 +549,7 @@ Different lists of genes can be obtained from various sources.
 ## RNA-Seq pojedynczych komórek
 
 
-![](images/single_cell.jpg)
+![](images/single_cell-1.jpg)
 
 ::: {.aside}
 
@@ -597,14 +619,15 @@ study Alzheimer’s disease." Cell 182.4 (2020): 976-991.
 Omika (ang. *omics*) – różne metody badawcze pozwalające na uzyskiwanie
 wielkoskalowych zestawów danych biologicznych, np.:
 
-::: 
  - Genomika (DNA)
  - Transkryptomika (RNA)
  - Proteomika (białka)
  - Metabolomika (metabolity)
  - Epigenomika (modyfikacje DNA)
- - **Ridikulomika: wiara, że wielkoskalowe zestawy danych biologicznych rozwiążą automatycznie wszystkie nasze problemy** {.fragment}
-:::
+
+. . .
+
+ - **Ridikulomika: wiara, że wielkoskalowe zestawy danych biologicznych rozwiążą automatycznie wszystkie nasze problemy** 
 
 ::: {.notes}
 
@@ -763,7 +786,7 @@ Sources
 #| fig-width: 5
 #| fig-height: 5
 library(qrcode)
-plot(qr_code("https://google.com"))
+plot(qr_code("https://january3.github.io/copernicus2023/"))
 ```
 
 
