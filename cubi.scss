@@ -1,0 +1,68 @@
+/*-- scss:defaults --*/
+
+@import url(https://fonts.googleapis.com/css?family=Fira+Sans);
+
+// fonts
+$font-family-sans-serif: "Fira Sans", sans-serif !default;
+$presentation-font-size-root: 48px;
+
+// Background Color: Pale Cyan (#D6EFFF)
+
+// This is a very light and delicate cyan color that provides a gentle and serene background.
+// Dark Cerulean/ Navy Blue: Dark Cerulean (#08457E)
+// 
+// This is a deep, rich cerulean blue color that adds a bold and vibrant element to the palette.
+// Complementary Accent Color: Light Sky Blue (#87CEEB)
+// 
+// This light sky blue shade complements the dark cerulean/navy blue and adds a touch of freshness to the palette.
+// Subtle Contrast Color: Light Gray (#D3D3D3)
+// 
+// Light gray can work as a neutral color to provide subtle contrast and balance to the palette. It can be used for borders, separators, or subtle text elements.
+// Supporting Color: Sea Foam (#98FFD3)
+// 
+// Sea foam is a soft, pale greenish-blue color that complements the cerulean tones and adds a soothing and complementary touch.
+// Accent Color: Goldenrod (#DAA520)
+// 
+// Goldenrod is a warm, yellowish-brown color that adds a touch of warmth and contrast to the palette without overpowering the cerulean vibe.
+
+
+$presentation-heading-color: #08457E;
+$presentation-title-slide-text-align: left;
+$presentation-font-smaller:0.75;
+
+
+$body-bg: #E6EFFF;
+$body-color: #08457E;
+$link-color: #78AFA3;
+$code-color: #A3A3A3;
+
+/*-- scss:rules --*/
+
+.title {
+  color: white !important;
+}
+
+.quarto-title-author {
+  color: white !important;
+}
+
+#title-slide {
+  transform: translate(-10%, -50%);
+}
+
+h3 {
+  color: #08457E !important;
+}
+
+
+.inverse, .inverse h2, .inverse h1 {
+  color: white !important;
+}
+
+li::marker {
+  color: #08457E !important;
+}
+
+.reveal .slide-number > a[href*='title-slide'] {
+  display: none;
+}

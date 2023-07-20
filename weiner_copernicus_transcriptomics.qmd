@@ -1,0 +1,741 @@
+---
+title: "Co porabiają nasze geny?"
+subtitle: "– czyli co to jest transkryptomika"
+author: 
+  - name: "January Weiner"
+    orcid: 0000-0003-1438-7819
+    affiliations:
+     - ref: cubi
+affiliations:
+  - id: cubi
+    name: Core Unit for Bioinformatics, BIH@Charité
+    address: Charitéplatz 1, 
+    postal-code: 10117 
+    city: Berlin 
+    country: Germany
+title-slide-attributes:
+  data-background-image: files/bih_bg_logo.png
+format:
+  revealjs:
+    footer: ""
+    theme: cubi.scss
+    transition: fade
+    slide-number: true
+    smaller: true
+    navigation-mode: linear
+    self-contained: true
+    auto-stretch: true
+    width: 1420
+    height: 800
+    center: false
+---
+
+
+```{r libraries,cache=FALSE}
+library(tidyverse)
+library(ggplot2)
+#library(readxl)
+#library(cowplot)
+#library(RColorBrewer)
+#library(cluster)
+#library(Rseasnap)
+#library(colorDF)
+#library(DESeq2)
+#library(tmod)
+```
+
+
+# Część I {.inverse background-color="#70ADC1"}
+
+## Jak działają nasze geny
+
+:::: {.columns}
+::: {.column width="50%"}
+
+::: {.r-stack}
+![](images/tt-2.png){.fragment}
+
+![](images/tt-3.png){.fragment}
+
+![](images/tt-4.png){.fragment}
+
+![](images/tt-5.png){.fragment}
+:::
+
+:::
+
+::: {.column width=40% .fragment}
+
+**Ekspresja genu** – gdy informacja genetyczna zamienia się w coś, co
+naprawdę działa
+
+**Transkrypcja** – przepisanie informacji z DNA na (m)RNA
+
+**Translacja** – przepisanie informacji z mRNA na białko
+
+:::
+
+::::
+
+::: {.notes}
+Transkrypcja i translacja
+
+XXX - number of molecules per cell
+
+:::
+
+
+## Różne komórki = różna transkrypcja
+
+::: {.r-stack}
+
+![](images/uklad_odpornosciowy-1.png){.fragment}
+
+![](images/uklad_odpornosciowy-2.png){.fragment}
+
+:::
+
+::: {.notes}
+
+Jak rozpoznać te różne komórki? -> mają na swojej powierzchni różne białka,
+na przykład:
+
+neutrofile - CD15, CD11, CD16, CD10
+
+makrofagi - integrin alpha M, CD14, Fc gamma receptory
+
+limfocyty T - TCR, CD3, 
+
+Th: CD4
+
+Tc: CD8
+
+chcemy dowiedzieć się co robią białka, ale duża część regulacji odbywa się
+na poziomie RNA, zaraz zobaczymy jak
+
+
+:::
+
+## Odpowiedź na bodźce = regulacja transkrypcji
+
+::: {.r-stack}
+
+
+![](images/interferon-1.png){.fragment}
+
+![](images/interferon-2.png){.fragment}
+
+![](images/interferon-3.png){.fragment}
+
+![](images/interferon-4.png){.fragment}
+
+![](images/interferon-5.png){.fragment}
+
+:::
+
+
+::: {.notes}
+
+źródło: https://www.nature.com/articles/s12276-021-00592-0
+Kim & Shin, "Type I and III interferon responses in SARS-Cov-2 infection", Exp Mol Med, 2021
+
+type I: receptory na wszystkich komórkach; odpowiedź antywirusowa,
+interferony są produkowane przez fibroblasty i monocyty 
+
+type II: (ifn-gamma) odpowiedź immunologiczna, produkowane przez limfocyty
+T cytotoksyczne i pomocnicze / natural killer cells, wiąże do ifngr 
+
+type III: podobne do type I, ale receptory głównie na komórkach nabłonkowych
+
+XXX odpowiedź interferonowa
+
+
+ * można łatwo izolować rna
+ * ale jak zmierzyć, którego rna jest ile?
+ * każde mRNA ma własną sekwencję, po której możemy je poznać (ta informacja
+  tam jest, wystarczy ją odczytać)
+ * w XX w opracowano różne metody na pomiar koncentracji wybranej
+
+:::
+
+## Co to jest Omika?
+
+Omika (ang. *omics*) – różne metody badawcze pozwalające na uzyskiwanie
+wielkoskalowych zestawów danych biologicznych, np.:
+
+::: {.incremental}
+ - Genomika (DNA)
+ - Transkryptomika (RNA)
+ - Proteomika (białka)
+ - Metabolomika (metabolity)
+ - Epigenomika (modyfikacje DNA)
+ - Ridikulomika: wiara, że wielkoskalowe zestawy danych biologicznych rozwiążą automatycznie wszystkie nasze problemy
+:::
+
+::: {.notes}
+
+Johnatan Eisen, "Bad omics word of the day"
+
+zachłyśnięcie się tymi metodami w pierwszych dwóch dekadach XXI wieku
+
+do dzisiaj to jeszcze żyje
+
+ridikulomika: wiara 
+
+:::
+
+
+
+## {background-image="images/arnolfini-bg.jpg" background-color="black"}
+
+
+:::: {.columns}
+::: {.column width="50%"}
+
+
+
+:::
+
+::: {.column width="50%"}
+::: {.r-stack}
+
+![](images/arnolfini_2.jpg){.fragment width="700"}
+
+![](images/arnolfini_3a.png){.fragment width="700"}
+
+![](images/arnolfini_3.png){.fragment width="700"}
+
+![](images/arnolfini_4.jpg){.fragment width="700"}
+
+![](images/arnolfini_4b.jpg){.fragment width="700"}
+
+:::
+
+:::
+
+::::
+
+::: {.notes}
+Jan Van Eyck, Arnolfini portrait, 1434
+
+There are 21 known works attributed to Van Eyck.
+:::
+
+
+
+
+
+## {background-color="black"}
+
+::: {.r-stack}
+
+![](images/monet_4.jpg){.fragment width=1000}
+
+![](images/monet_3.jpg){.fragment width=1000}
+
+![](images/monet_2.jpg){.fragment width=1200}
+
+
+:::
+
+
+::: {.notes}
+Claude Monet, Saint-Georges majeur au crépuscule, 1908
+
+Monet painted ~ 2500 paintings
+:::
+
+## {background-image="images/monet.jpg" background-color="black"}
+
+## {background-image="images/sangiorgio.jpg" background-color="black"}
+
+## {background-image="images/monet_all.png" background-color="black"}
+
+
+
+
+
+
+
+## Wielkoskalowe zestawy danych w biologii
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+### Klasyczne metody
+
+![](images/arnolfini.jpg)
+
+:::
+
+::: {.column width="50%" .fragment}
+
+### Metody wielkoskalowe ("omika")
+
+![](images/monet.jpg)
+
+:::
+
+::::
+
+::: {.notes}
+
+
+ * Powolne
+ * Dokładne / pomiary absolutne
+ * Kosztowne (w przeliczeniu na jeden pomiar)
+ * Tanie (w przeliczeniu na eksperyment)
+ * Zazwyczaj dużo więcej próbek niż pomiarów
+ * Można opracować w Excelu
+
+
+ * Szybkie
+ * Mniej precyzjne / wartości względne
+ * Kosztowne (w przeliczeniu na jeden eksperyment)
+ * Tanie (w przeliczeniu na jeden pomiar)
+ * Zazwyczaj dużo więcej pomiarów niż próbek
+ * Wymagają skomplikowanych narzędzi bioinformatycznych
+
+
+Przyjrzyjmy się więc metodzie, która pozwala na szybkie i tanie pomiary
+wielu próbek RNA
+
+:::
+
+## RNA-Seq w transkryptomice
+
+
+::: {.r-stack}
+
+![](images/sekwencjonowanie_1.png){.fragment width=1500}
+
+![](images/sekwencjonowanie_2.png){.fragment width=1500}
+
+![](images/sekwencjonowanie_3.png){.fragment width=1500}
+
+![](images/sekwencjonowanie_4.png){.fragment width=1500}
+
+:::
+
+## Jak działa sekwencjonowanie?
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+
+![](images/illumina_2.png)
+
+:::
+
+::: {.column width="50%" .fragment}
+
+![](images/illumina_3.png)
+
+:::
+::::
+
+## Tak wyglądają wyniki
+
+```{r results="markdown"}
+cnts <- readRDS("data/counts.rds")
+cnts %>% as.data.frame %>% 
+  dplyr::select(1:6) %>% slice(1:10) %>%
+             mutate(' ... '='...')  %>%
+knitr::kable()
+```
+
+
+## I co z tego?
+
+## {background-image="images/tb.png" background-color="white"}
+
+::: {.notes}
+źródło: WHO (https://www.who.int/teams/global-tuberculosis-programme/tb-reports/global-tuberculosis-report-2022/tb-disease-burden/2-1-tb-incidence#:~:text=In%202021%2C%20eight%20countries%20accounted,2).)
+
+10 mln zachorowań na gruźlicę w 2021 r.
+
+1.6 mln zgonów na świecie w 2021 (wzrost!)
+
+Problem: zainfekowani: 20-25% globalnej populacji; 5-15% zachoruje w ciągu
+życia
+
+:::
+
+## {background-image="images/tb_scheme.png"}
+
+
+## Cztery geny wystarczą
+
+::: {.r-stack}
+
+![](images/tb_four_gene-1.png){width=1500}
+
+![](images/tb_four_gene-2.png){width=1500 .fragment}
+
+:::
+
+::: {.aside}
+Suliman, Sara, et al. "Four-gene pan-African blood signature predicts progression to tuberculosis." American journal of respiratory and critical care medicine 197.9 (2018): 1198-1208.
+:::
+
+
+## Różnicująca analiza ekspresji
+
+```{r}
+covar <- readRDS("data/covar.rds")
+cnts  <- readRDS("data/counts.rds")
+annot <- readRDS("data/annot.rds")
+```
+
+```{r deseq2,cache=TRUE}
+library(DESeq2)
+ds2 <- DESeqDataSetFromMatrix(countData = cnts, colData=covar, design = ~group)
+ds2 <- DESeq(ds2)
+#res <- map(rlang::set_names(resultsNames(ds2)), ~ results(ds2, name=.x))
+res <- results(ds2, name="group_SC2_vs_no")
+sgn <- sum(res$padj < 0.05 & abs(res$log2FoldChange) > 0, na.rm=TRUE)
+```
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+Grupa 1: zdrowi
+
+Grupa 2: chorzy
+
+Pytanie: jakie procesy zachodzą w układzie immunologicznym pacjentów?
+
+:::
+
+::: {.column width="50%" .fragment}
+
+
+```{r}
+library(ggplot2)
+library(ggbeeswarm)
+theme_set(theme_minimal())
+
+lcpm <- log2(t(t(cnts) / colSums(cnts)) * 1e6)
+sel  <- "ENSG00000111335"
+df <- data.frame(Ekspresja=lcpm[sel, ], Grupa=covar$group) %>%
+  mutate(Grupa = ifelse(Grupa == "SC2", "Sars-Cov-2", "Inne"))
+ggplot(df, aes(x=Grupa, y=Ekspresja)) + geom_boxplot() + 
+  geom_beeswarm() + ggtitle("OAS2")
+```
+:::
+
+::::
+
+::: {.notes}
+
+OAS2 - jest aktywowany przez interferon. koduje enzym syntetyzujący krótkie
+łańcuchy RNA (oligo-A, 2-5 A), potrzebne z kolei do aktywacji RNazy L
+
+:::
+
+## I tu pojawia się problem...
+
+Mamy w sumie `r nrow(res)` genów, w tym `r sgn` różnicuje grupy
+
+## 
+
+```{r results="asis"}
+res <- res %>% 
+  as.data.frame  %>% 
+  merge(annot, ., by.x="PrimaryID", by.y=0) %>% 
+  arrange(padj)
+
+DT::datatable(res %>% select(SYMBOL, GENENAME, log2FoldChange, padj)) %>%
+  DT::formatSignif(c("log2FoldChange", "padj"), digits=2)
+```
+
+
+## Analiza wzbogacenia grup genów 
+
+### (Gene Set Enrichment Analysis)
+
+::: {.r-stack}
+
+![](images/gorilla.png){.fragment width=900}
+
+![](images/hsa04110.gse16873.png){.fragment width=900}
+
+:::
+
+
+## RNA-Seq pojedynczych komórek
+
+
+![](images/scrnaseq.jpg)
+
+::: {.notes}
+
+Different lists of genes can be obtained from various sources.
+
+ * Coexpression data sets: groups of genes that have correlated expression
+   profiles
+
+--
+
+ * Results from another differential gene expression analysis experiment:
+   groups of genes significant in a comparison
+
+--
+
+ * Targets of a particular miRNA determined computationally
+
+
+:::
+
+
+## RNA-Seq pojedynczych komórek
+
+
+![](images/single_cell.jpg)
+
+::: {.aside}
+
+Source: Dynamic Interstitial Cell Response during Myocardial Infarction
+Predicts Resilience to Rupture in Genetically Diverse Mice, Cell Reports
+2020, https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7059115/
+
+:::
+
+::: {.notes}
+
+U myszy
+
+Niedokrwienie serca -> martwica -> zapalenie -> gojenie lub uszkodzenie
+
+Pokazuje wczesne zmiany w częstości występowania myofibroblastów, injury
+response
+
+
+:::
+
+## RNA-Seq pojedynczych komórek
+
+
+![](images/single_cell-3.jpg)
+
+::: {.notes}
+
+Pokazuje wczesne zmiany w częstości występowania myofibroblastów, injury
+response
+
+
+:::
+
+
+## Transkryptomika przestrzenna
+
+![](images/spatial-2.png){width=1000}
+
+
+::: {.notes}
+
+Source: https://www.cell.com/cell/pdf/S0092-8674(20)30815-1.pdf
+Chen, Wei-Ting, et al. "Spatial transcriptomics and in situ sequencing to
+study Alzheimer’s disease." Cell 182.4 (2020): 976-991.
+
+:::
+
+
+## Na zakończenie...
+
+::: {.r-stack}
+
+![](images/popularnosc-1.png){.fragment width=1500}
+
+![](images/popularnosc-2.png){.fragment width=1500}
+
+![](images/popularnosc-3.png){.fragment width=1500}
+
+![](images/popularnosc-4.png){.fragment width=1500}
+
+:::
+
+
+## Na zakończenie...
+
+Omika (ang. *omics*) – różne metody badawcze pozwalające na uzyskiwanie
+wielkoskalowych zestawów danych biologicznych, np.:
+
+::: 
+ - Genomika (DNA)
+ - Transkryptomika (RNA)
+ - Proteomika (białka)
+ - Metabolomika (metabolity)
+ - Epigenomika (modyfikacje DNA)
+ - **Ridikulomika: wiara, że wielkoskalowe zestawy danych biologicznych rozwiążą automatycznie wszystkie nasze problemy** {.fragment}
+:::
+
+::: {.notes}
+
+source: https://bmcbiol.biomedcentral.com/articles/10.1186/1741-7007-10-92
+
+Johnatan Eisen, "Bad omics word of the day"
+
+zachłyśnięcie się tymi metodami w pierwszych dwóch dekadach XXI wieku
+
+do dzisiaj to jeszcze żyje
+
+ridikulomika: wiara 
+
+:::
+
+
+---
+
+## Slide 1 
+
+To compile, type `quarto render template.qmd`
+
+Make sure you have Quarto 1.2 installed from
+[here](https://quarto.org/docs/download/prerelease.html).
+
+::: {.aside}
+This aside note can be used to add citations or notes
+:::
+
+## Multicolumn slide
+
+:::: {.columns}
+
+::: {.column width="40%" .fragment}
+### Left column title
+
+Left column...
+:::
+
+::: {.column width="60%" .fragment}
+### Right column title
+
+Right column (60%)...
+
+(adding `.fragment` causes the contents to be displayed in steps)
+:::
+
+::::
+
+
+
+# Part II separator slide {.inverse background-color="#70ADC1"}
+
+## Simple numbered and unnumbered lists
+
+:::: {.columns}
+
+::: {.column width="50%"}
+ * One
+ * Two
+:::
+
+::: {.column width="50%"}
+ 1. One
+ 2. Two
+:::
+
+::::
+
+## Incremental list
+
+::: {.incremental}
+ - Item 1
+ - Item 2
+ - Item 3
+:::
+
+
+## Incremental contents
+
+First part
+
+. . .
+
+Second part
+
+
+---
+
+This is a slide without a title (use the dashes to separate)
+
+## Transitions {transition="zoom"}
+
+Define them in the YAML header or like here, in the slide title.
+
+Types: none, fade, slide, convex, concave, zoom
+
+
+## Code 
+
+
+```{r}
+#| echo: true
+#| output-location: column-fragment
+#| label: fig-sample
+#| fig-cap: A dumb plot
+plot(1:10)
+```
+
+::: {.callout-tip}
+Ctrl-click on the image to zoom. And here is a `r pi` for you.
+:::
+
+## Code
+
+There are many customization options for the code. For example, you can
+highlight (and even animate) certain lines of code:
+
+
+```{r}
+#| code-line-numbers: "|1|2|3|"
+#| echo: true
+a <- rnorm(10)
+b <- rnorm(10) + a
+c <- a + b * rnorm(10)
+```
+
+You can also specify where precisely should the output of the code go:
+below the code (default), on the next slide, on a right-hand column...
+
+
+
+
+## Thank you {.inverse background-color="#70ADC1"}
+
+:::: {.columns}
+
+::: {.column width="40%"}
+Acknowledgements
+
+ - N.N.
+ - Y.Y.
+ 
+:::
+
+::: {.column width="40%"}
+Sources
+
+ - Source 1
+ - Source 2
+:::
+
+::: {.column width="20%"}
+
+```{r}
+#| fig-width: 5
+#| fig-height: 5
+library(qrcode)
+plot(qr_code("https://google.com"))
+```
+
+
+
+:::
+
+
+::::
