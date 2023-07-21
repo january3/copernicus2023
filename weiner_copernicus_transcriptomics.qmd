@@ -25,7 +25,7 @@ format:
     navigation-mode: linear
     self-contained: true
     auto-stretch: true
-    width: 1420
+    width: 1220
     height: 800
     center: false
 ---
